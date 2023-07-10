@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CafeTest" project="project2" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.example.demo.di.CafeTest" time="0.879" displayname="CafeTest" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.di.CafeTest]">
-    <testcase name="test" classname="com.example.demo.di.CafeTest" time="0.879" displayname="test()" uniqueid="[engine:junit-jupiter]/[class:com.example.demo.di.CafeTest]/[method:test()]"/>
-  </testsuite>
-</testrun>

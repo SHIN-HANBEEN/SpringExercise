@@ -1,7 +1,0 @@
-package com.example.demo.di;
-
-public class Dog {
-	static void sound() {
-		System.out.println("왕왕 짖는다.");
-	}
-}
