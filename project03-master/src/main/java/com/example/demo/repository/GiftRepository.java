@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entity.Board;
+import com.example.demo.entity.Gift;
+
+public interface GiftRepository extends JpaRepository<Gift, Integer> {
+
+}

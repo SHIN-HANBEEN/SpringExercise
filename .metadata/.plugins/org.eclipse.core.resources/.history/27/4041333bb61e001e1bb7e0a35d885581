@@ -1,0 +1,10 @@
+package com.example.demo.di;
+
+public class DogTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.example.demo.lombok;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class BookTest {
+	
+	@Test
+	public void test() {
+		
+	}
+
+}
