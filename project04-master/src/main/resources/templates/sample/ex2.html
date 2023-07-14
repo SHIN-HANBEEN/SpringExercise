@@ -1,0 +1,16 @@
+<!-- 동적 페이지 만들기 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">  <!-- thymeleaf를 사용하기 위한 namespace 선언 -->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 변수 표현식 -->
+    <h1 th:text="${msg}"></h1> <!-- 컨트롤러에서 전달한 msg변수 출력하기 -->
+
+    <!-- 링크 표현식 -->
+    <a th:href="@{/sample/ex1}">첫번째 페이지로 가기</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!-- 컨트롤러에서 전달받은 객체 표현하기 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 th:text="${dto.no}"></h1> <!-- 컨트롤러에서 전달한 dto객체의 필드 꺼내기 -->
+    <h1 th:text="${dto.text}"></h1>
+    <h1 th:text="${dto.regDate}"></h1>
+</body>
+</html>

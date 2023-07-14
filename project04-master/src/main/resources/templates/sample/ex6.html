@@ -1,0 +1,34 @@
+<!-- thymeleaf의 기본객체 사용하기 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>문자열객체</h1>
+    <p>[[${#strings.contains(dto.text, 'a')}]]</p> <!-- 문자열 내 포함 여부 -->
+    <p>[[${#strings.startsWith(dto.text, 'b')}]]</p> <!-- 시작문자열 일치 여부 -->
+    <p>[[${#strings.substring(dto.text, 0, 2)}]]</p> <!-- 문자열을 특정 인덱스만큼 자르기 -->
+    <p>[[${#strings.replace(dto.text, 'a', 'b')}]]</p> <!-- 문자열 대체 -->
+    <p>[[${#strings.toUpperCase(dto.text)}]]</p> <!-- 대문자로 변환 -->
+    <p>[[${#strings.toLowerCase(dto.text)}]]</p> <!-- 소문자로 변환 -->
+
+    <h1>숫자객체</h1>
+    <!-- 숫자를 지정된 형식으로 출력하기 -->
+    <p>[[${#numbers.formatInteger(1,5)}]]</p> <!-- 자리수만큼 0으로 채워서 출력 -->
+    <p>[[${#numbers.formatInteger(100000,3,'POINT')}]]</p> <!-- 패턴을 지정하여 출력 -->
+    <p>[[${#numbers.formatCurrency(100)}]]</p> <!-- 화폐단위로 출력 -->
+    <p>[[${#numbers.formatPercent(0.2,2,0)}]]</p> <!-- 퍼센트단위로 출력. 0~1사이 숫자, 정수자리수, 소수자리수 -->
+
+    <h1>날짜객체</h1>
+    <!--  날짜를 지정된 형식으로 출력하기  -->
+    <p>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</p>
+    <p>[[${#temporals.format(dto.regDate, 'hh시mm분ss초')}]]</p>
+    <!--  날짜에서 특정값 추출하기  -->
+    <p>[[${#temporals.year(dto.regDate)}]]</p> <!-- 연도 -->
+    <p>[[${#temporals.month(dto.regDate)}]]</p> <!-- 월 -->
+    <p>[[${#temporals.day(dto.regDate)}]]</p> <!-- 일 -->
+</body>
+</html>

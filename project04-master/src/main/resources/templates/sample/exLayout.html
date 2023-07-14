@@ -1,0 +1,36 @@
+<!-- 템플릿 레이아웃 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<style>
+    .header {
+        height: 20vh;
+        background-color: aqua;
+    }
+    .content {
+        height: 30vh;
+        background-color: lightgray;
+    }
+    .footer {
+        height: 10vh;
+        background-color: green;
+    }
+</style>
+
+<body>
+
+<div class="header">
+    <h1>HEADER</h1>
+</div>
+<div class="content" >
+	<h1>CONTENT</h1>
+    <!-- 템플릿 조각 넣기 -->
+<!--    <th:block th:replace = "~{sample/fragment :: frag}"></th:block>-->
+</div>
+<div class="footer">
+    <h1>FOOTER</h1>
+</div>
+
+</body>
+</html>

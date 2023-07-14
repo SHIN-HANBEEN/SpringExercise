@@ -1,0 +1,28 @@
+<!-- thymeleaf의 inline 속성 사용하기 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- 컨트롤러가 전달한 변수 출력 -->
+    <h1 th:text="${result}"></h1>
+    <h1 th:text="${dto}"></h1>
+
+    <!-- 자바스크립트 인라인 사용 안함 -->
+    <script>
+        var msg = [[${result}]]; //순수하게 그대로 해석함
+        var dto = [[${dto}]];
+    </script>
+
+    <!-- 자바스크립트 인라인 사용 -->
+    <script th:inline="javascript">
+        var msg = [[${result}]]; //문자열로 변환
+        var dto = [[${dto}]]; //json으로 변환
+
+        console.log(dto.text);  //자바스크립트 자료형에 맞게 변환해주기 때문에 바로 사용 가능
+    </script>
+</body>
+</html>

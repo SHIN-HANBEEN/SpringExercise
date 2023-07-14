@@ -1,0 +1,31 @@
+<!-- thymeleaf의 반복문, 블록, 조건문 속성 사용하기 -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>리스트의 모든 요소 출력하기</h1>
+    <p>[[${list[0]}]]</p>
+    <p>[[${list[1]}]]</p>
+    <p>[[${list[2]}]]</p>
+
+    <h1>반복문으로 리스트의 모든 요소 출력하기</h1>
+    <p th:each="dto : ${list}">
+        [[${dto}]]
+    </p>
+
+    <h1>조건문을 사용하여 2번째 요소만 출력하기</h1>
+    <th:block th:each="dto: ${list}"> <!-- html태그 없이 타임리프 반복문 사용 -->
+        <p th:if="${dto.no == 2}" th:text="${dto}"></p> <!-- 조건을 만족하는 경우 -->
+<!--        <p th:unless="${dto.no == 2}" th:text="${dto}"></p> --> <!-- 조건을 만족하지 않는 경우 -->
+    </th:block>
+
+    <h1>삼항연산자를 사용하여 2번째 요소만 출력하기</h1>
+    <th:block th:each="dto: ${list}">
+        <p th:text="${dto.no==2}?${dto.no}:---"></p> <!-- 두번째 요소라면 번호를 출력하고 아니라면 --으로 출력 -->
+    </th:block>
+</body>
+</html>
