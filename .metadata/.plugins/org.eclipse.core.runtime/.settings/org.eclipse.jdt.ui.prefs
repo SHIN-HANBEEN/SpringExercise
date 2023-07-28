@@ -1,14 +1,15 @@
 content_assist_autoactivation_triggers_java=.,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 content_assist_disable_completion_trigger_chars=true
-content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.example.demo.lombok.Book"><rhs name\="com.example.demo.lombok.Book"/></lhs><lhs name\="com.example.demo.lombok.Car"><rhs name\="com.example.demo.lombok.Car"/></lhs><lhs name\="com.example.demo.di.Chef"><rhs name\="com.example.demo.di.Chef"/></lhs><lhs name\="com.example.demo.di.Teacher"><rhs name\="com.example.demo.di.Teacher"/></lhs><lhs name\="com.example.demo.entity.Board"><rhs name\="com.example.demo.entity.Board"/></lhs><lhs name\="com.example.demo.entity.Book"><rhs name\="com.example.demo.entity.Book"/></lhs></history>
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.example.demo.lombok.Book"><rhs name\="com.example.demo.lombok.Book"/></lhs><lhs name\="com.example.demo.lombok.Car"><rhs name\="com.example.demo.lombok.Car"/></lhs><lhs name\="com.example.demo.di.Chef"><rhs name\="com.example.demo.di.Chef"/></lhs><lhs name\="com.example.demo.di.Teacher"><rhs name\="com.example.demo.di.Teacher"/></lhs><lhs name\="com.example.demo.entity.Board"><rhs name\="com.example.demo.entity.Board"/></lhs><lhs name\="com.example.demo.entity.Book"><rhs name\="com.example.demo.entity.Book"/></lhs><lhs name\="org.springframework.data.domain.AbstractPageRequest"><rhs name\="org.springframework.data.domain.PageRequest"/></lhs><lhs name\="org.springframework.data.domain.Pageable"><rhs name\="org.springframework.data.domain.PageRequest"/></lhs><lhs name\="org.springframework.data.domain.PageRequest"><rhs name\="org.springframework.data.domain.PageRequest"/></lhs></history>
 content_assist_number_of_computers=15
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=0,0,0
 eclipse.preferences.version=1
 editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
-org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.layout=1
 org.eclipse.jdt.internal.ui.navigator.librariesnode=true
 org.eclipse.jdt.ui.formatterprofiles.version=23
+sourceHoverBackgroundColor=255,255,225
 sp_cleanup.add_all=false
 sp_cleanup.add_default_serial_version_id=true
 sp_cleanup.add_generated_serial_version_id=false

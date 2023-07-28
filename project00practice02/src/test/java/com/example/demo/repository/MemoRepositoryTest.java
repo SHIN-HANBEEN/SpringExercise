@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.example.demo.entity.Memo;
 
@@ -17,6 +20,23 @@ public class MemoRepositoryTest {
 	// 그것을 Test 파일에서 Autowired 해서 사용하고 있는 것이다.
 	@Autowired
 	MemoRepository memoRepository;
+	
+	@Test
+	public void testPageDefault() {
+		// 1페이지 10개
+		Pageable pageable = PageRequest.of(0, 10);
+		
+		Page<Memo> result = memoRepository.findAll(pageable);
+		
+		System.out.println(result);
+	}
+	
+	@Test
+	public void testDelete() {
+		Long mno = 100L;
+		memoRepository.deleteById(mno);
+	}
+	
 	
 	@Test
 	public void testUpdate() {
