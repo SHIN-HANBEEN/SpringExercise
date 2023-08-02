@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block th:each="no: ${list}">
+		<div th:if="(${no} % 2)==0" th:text="${no}"></div>
+	</th:block>
+</body>
+</html>
+

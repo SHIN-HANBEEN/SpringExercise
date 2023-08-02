@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>삼항연산자</h1>
+	<th:block th:each="dto: ${list}">
+		<span th:text="${dto.no==2}?${dto.no}:---"></span>
+	</th:block>
+	
+	<h1>조건문</h1>
+	<th:block th:each="dto: ${list}">
+		<span th:if="${dto.no == 2}" th:text="${dto}"></span>
+		<span th:unless="${dto.no == 2}" th:text="${dto}"></span>
+	</th:block>
+	
+	<h1>블록태그</h1>
+	<th:block th:each="dto: ${list}">
+		<p>[[${dto}]]</p>
+		<span>[[${dto}]]</span>
+	</th:block>
+	
+	<h1>반복문</h1>
+	<ul>
+		<!-- 반복문을 사용하기 위해 th:each 와 람다식을 사용했다. -->
+		<li th:each="dto:${list}">[[${dto}]]</li>
+	</ul>
+	
+	<h1>반복문의 반복 상태</h1>
+	<ul>
+		<!-- 두번쨰 파라미터 -->
+		<li th:each="dto, status : ${list}">
+			[[${status}]]
+		</li>
+	</ul>
+</body>
+</html>
+
