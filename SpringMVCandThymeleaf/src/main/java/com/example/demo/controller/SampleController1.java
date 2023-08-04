@@ -19,6 +19,19 @@ import com.example.demo.dto.StudentDTO;
 @RequestMapping("/return")
 public class SampleController1 {
 	@ResponseBody
+	@GetMapping("/q6")
+	public ResponseEntity<String> q6() {
+		return new ResponseEntity<String>("response fail..", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ResponseBody
+	@GetMapping("/q7")
+	public ResponseEntity<CarDTO> q7() {
+		CarDTO carDTO1 = new CarDTO("현대", "코나", "블랙");
+		return new ResponseEntity<CarDTO>(carDTO1, HttpStatus.OK);
+	}
+	
+	@ResponseBody
 	@GetMapping("/q5")
 	public List<StudentDTO> q5() {
 		StudentDTO studentDTO1 = new StudentDTO(1, "둘리", 3);
@@ -52,8 +65,8 @@ public class SampleController1 {
 	}
 	
 	@GetMapping("/q1")
-	public String q1() {
-		return "/return/ex1.html";
+	public void q1() {
+		
 	}
 	
 	
