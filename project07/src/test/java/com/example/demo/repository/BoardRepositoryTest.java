@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.Board;
+import com.example.demo.entity.Member;
 
 
 @SpringBootTest
@@ -16,10 +17,15 @@ public class BoardRepositoryTest {
 	@Autowired
 	BoardRepository repository;
 	
+	
 	@Test
 	public void 게시물등록() {
-		Board board = new Board(0,"1번글","내용입니다","둘리");
-		repository.save(board);
+		for (int i = 1; i < 4; i++) {
+			Member member = Member.builder().id("user" + i).build();
+			Board board = Board.builder().content(i + "번 내용").title(i + "번글")
+					.writer(member).build();
+			repository.save(board);
+		}
 	}
 
 	@Test

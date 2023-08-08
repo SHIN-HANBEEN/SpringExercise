@@ -1,7 +1,17 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
@@ -23,7 +33,10 @@ public class Board extends BaseEntity {
     @Column(length = 1500, nullable = false)
     private String content; //내용
 
-    @Column(length = 50, nullable = false)
-    private String writer; //작성자
+    @ManyToOne
+    private Member writer; //작성자
+    // 자료형을 String 에서 Member 로 바꾸면 JPA가 외래키임을 인식하게된다. 
+    // 또한 @ManyToOne 애노테이션을 추가해준다. Board 테이블을 삭제한다음 다시 생성하면
+    // 다대일 관계가 생긴다. 
 
 }
