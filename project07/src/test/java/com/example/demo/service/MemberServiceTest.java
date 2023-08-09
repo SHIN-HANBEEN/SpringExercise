@@ -20,6 +20,9 @@ public class MemberServiceTest {
 	@Autowired
 	MemberRepository memberRepository;
 	
+	@Autowired
+	MemberService service;
+	
 	@Test
 	public void 회원목록조회() {
 		Page<MemberDTO> page = memberService.getList(0);
@@ -44,5 +47,29 @@ public class MemberServiceTest {
 			}
 		}
 		memberRepository.saveAll(list);
+	}
+	
+	@Test
+	public void 회원등록() {
+		MemberDTO dto = MemberDTO.builder()
+				.id("duli")
+				.password("duliPassword")
+				.name("둘리")
+				.build();
+		
+		boolean isSuccess = service.register(dto);
+		
+		if(isSuccess) {
+			System.out.println("회원이 등록되었습니다.");
+		} else {
+			System.out.println("중복된 회원 입니다.");
+		}
+	}
+	
+	@Test 
+	public void 특정회원정보조회() {
+		String id = "user01";
+		MemberDTO memberDTO = service.read(id);
+		System.out.println(memberDTO);			
 	}
 }

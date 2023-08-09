@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -22,10 +20,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 
-	// 메인화면
-	@GetMapping("/main")
-	public void main() {
-	}
+
 
 	// 목록화면
 	@GetMapping("/list")

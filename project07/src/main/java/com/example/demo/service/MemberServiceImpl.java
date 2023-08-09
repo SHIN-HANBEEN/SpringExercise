@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,5 +33,36 @@ public class MemberServiceImpl implements MemberService {
 		return dtoPage;
 	}
 	
+	@Override
+	public boolean register(MemberDTO dto) {
+		String id = dto.getId(); // 아이디 꺼내기
+		
+		Optional<Member> getDto = repository.findById(id); 
+		if (getDto.isPresent()) { // 해당 게시물이 존재하는지 확인
+			System.out.println("사용중인 아이디입니다.");
+			return false;
+		}
+		
+//		MemberDTO getDto = read(id); // 회원 상세조회
+//		if(getDto != null) {
+//			System.out.println("사용중인 아이디입니다.");
+//			return false;
+//		}
+		
+		Member entity = dtoToEntity(dto);
+		repository.save(entity);		
+		return true;
+	}
 	
+	@Override
+	public MemberDTO read(String id) {
+		Optional<Member> result = repository.findById(id);
+		
+		if(result.isPresent()) {
+			Member member = result.get();
+			return entityToDto(member);
+		} else {
+			return null;
+		}
+	}
 }

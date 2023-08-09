@@ -19,4 +19,20 @@ public interface MemberService {
 		
 		return dto;
 	}
+	
+	boolean register(MemberDTO dto); // 회원 등록 추상메서드 추가
+	// 항상 회원 등록이 성공하는 것은 아니다. 
+	
+	// DTO 를 엔티티로 변환하는 메소드 추가
+	default Member dtoToEntity(MemberDTO dto) {
+		Member entity = Member.builder()
+				.id(dto.getId())
+				.password(dto.getPassword())
+				.name(dto.getName())
+				.build();
+		return entity;
+	}
+	
+	// 회원 상세페이지 조회(단건 조회) 추상 메서드 추가
+	MemberDTO read(String id);
 }
