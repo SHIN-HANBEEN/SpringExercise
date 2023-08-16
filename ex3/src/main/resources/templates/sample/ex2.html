@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Title</title>
+    <style>
+        .target {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li th:each="dto : ${list}">
+            [[${#numbers.formatInteger(dto.sno, 4)}]]
+            <br>
+            [[${#temporals.format(dto.regTime, 'yyyy/MM/dd')}]]
+        </li>
+    </ul>
+</body>
+</html>
+
