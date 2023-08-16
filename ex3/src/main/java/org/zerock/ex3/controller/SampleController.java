@@ -1,7 +1,6 @@
 package org.zerock.ex3.controller;
 
-import lombok.extern.log4j.Log4j2;
-import org.springframework.cglib.core.Local;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
@@ -41,7 +42,7 @@ public class SampleController {
     }
 
 //    @GetMapping 의 value 속성값을 '{ }' 로 처리하면 하나 이상의 URL을 지정할 수 있습니다.
-    @GetMapping({"/ex2", "/exLink"})
+    @GetMapping({"/ex2", "/exLink", "/exTemplate", "/exSidebar"})
     public void exModel(Model model) {
         List<SampleDTO> list = IntStream.rangeClosed(1, 20).asLongStream()
                                 .mapToObj(i -> {
@@ -56,8 +57,15 @@ public class SampleController {
         model.addAttribute("list", list);
     }
 
+	@GetMapping({"/exLayout1", "/exLayout2"})
+	public void exLayout1() {
+		log.info("exLayout..........");
+	}
+
     @GetMapping("/ex1")
     public void ex1() {
         log.info("ex1...............");
     }
 }
+
+
