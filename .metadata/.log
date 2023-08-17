@@ -3592,3 +3592,26 @@ Caused by: java.lang.IllegalArgumentException: Duplicate root element project10
 
 !ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 09:07:42.206
 !MESSAGE Classpath changed for project: ex3
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:42:30.899
+!MESSAGE Classpath changed for project: tentrental
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:42:30.899
+!MESSAGE Boot project ADDED: tentrental
+
+!ENTRY org.eclipse.egit.core 4 0 2023-08-17 13:42:31.067
+!MESSAGE Connecting Git team provider failed. See log for details.
+!SUBENTRY 1 org.eclipse.egit.core 4 0 2023-08-17 13:42:31.067
+!MESSAGE Error connecting project TeamProjectSourceCode, no Git repositories found
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:42:31.482
+!MESSAGE Classpath changed for project: tentrental
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:43:06.985
+!MESSAGE Classpath changed for project: tentrental
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:51:32.933
+!MESSAGE Classpath changed for project: tentrental
+
+!ENTRY org.springframework.tooling.boot.ls 1 0 2023-08-17 13:51:42.642
+!MESSAGE Classpath changed for project: tentrental
