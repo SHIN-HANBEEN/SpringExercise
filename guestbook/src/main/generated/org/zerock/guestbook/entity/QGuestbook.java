@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QGuestbook is a Querydsl query type for Guestbook
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class    QGuestbook extends EntityPathBase<Guestbook> {
+public class QGuestbook extends EntityPathBase<Guestbook> {
 
     private static final long serialVersionUID = -1568079625L;
 
