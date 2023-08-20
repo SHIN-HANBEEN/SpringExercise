@@ -15,4 +15,16 @@ public interface GuestbookService {
                 .build();
         return entity;
     }
+
+    default GuestbookDTO entityToDto(Guestbook entity) {
+        GuestbookDTO dto = GuestbookDTO.builder()
+                .gno(entity.getGno())
+                .title(entity.getTitle())
+                .content(entity.getContent())
+                .writer(entity.getWritter())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
+                .build();
+        return dto;
+    }
 }

@@ -8,11 +8,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 // 강의에서는 @Data 를 이용하는데 뭐가 사용되는지 명확히 보기 위해서 하나씩 작성합니다.
-@Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-@RequiredArgsConstructor
+@Data
 public class GuestbookDTO {
     private Long gno;
     private String title;
