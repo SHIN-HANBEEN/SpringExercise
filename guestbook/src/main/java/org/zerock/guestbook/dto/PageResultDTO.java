@@ -34,9 +34,11 @@ public class PageResultDTO<DTO, EN> {
 
     public PageResultDTO(Page<EN> result, Function<EN, DTO> fn) {
         dtoList = result.stream().map(fn).collect(Collectors.toList());
+        totalPage = result.getTotalPages();
+        makePageList(result.getPageable());
     }
 
-    public void makePageList(Pageable pageable) {
+    private void makePageList(Pageable pageable) {
         this.page = pageable.getPageNumber() + 1; //page index 는 0부터 이므로 +1
         this.size = pageable.getPageSize();
 
