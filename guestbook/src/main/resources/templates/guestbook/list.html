@@ -8,40 +8,96 @@
 
         <table class="table table-striped">
             <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Gno</th>
-                <th scope="col">Title</th>
-                <th scope="col">Regdate</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Gno</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Regdate</th>
+                </tr>
             </thead>
             <tbody>
-            <tr th:each="dto: ${result.dtoList}">
-                <th scope="row">[[${dto.gno}]]</th>
-                <td>[[${dto.title}]]</td>
-                <td>[[${dto.writer}]]</td>
-                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
-            </tr>
+                <tr th:each="dto: ${result.dtoList}">
+                    <th scope="row">[[${dto.gno}]]</th>
+                    <td>[[${dto.title}]]</td>
+                    <td>[[${dto.writer}]]</td>
+                    <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                </tr>
             </tbody>
         </table>
 
 <!--        페이징 출력 -->
         <ul class="pagination h-100 justify-content-center align-items-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${result.page-10})}" tabindex="-1">Previous</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} "
                 th:each="page: ${result.pageList}">
-                <a class="page-link" href="#">
+                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${page})}">
                     [[${page}]]
                 </a>
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${(10*((result.page+10)/10)) + 1})}">Next</a>
             </li>
         </ul>
 <!--    /페이징 출력 -->
+<!--    모달 창 실행-->
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">회원등록성공</h5>
+                        <button type="button" class="btn-close close-area1" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>회원 등록이 완료되었습니다. 로그인을 진행해주세요.</p>
+                    </div>
+                    <div class="modal-footer">
+<!--                        <button type="button" class="btn btn-primary">로그인하기</button>-->
+                        <a href="/user/login" class="btn btn-primary">로그인하기</a>
+                        <button type="button" class="btn btn-secondary close-area2" data-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--    /모달 창-->
+<!--        register( ) 후 전달되는 msg 값을 확인
+    아래 코드에서 const closeBtn 으로 모달을 닫는 버튼들을 지정한다
+    해단 버튼이 클릭되었을 때 display 를 none 으로 설정해둔다.
+-->
+        <script th:inline="javascript">
+            var msg = [[${msg}]];
+            console.log(msg);
+
+            // Wait for the DOM to be ready
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.querySelector(".modal");
+                const closeBtn1 = modal.querySelector(".close-area1");
+                const closeBtn2 = modal.querySelector(".close-area2");
+
+                closeBtn1.addEventListener("click", function(e) {
+                    modal.style.display = "none";
+                });
+                closeBtn2.addEventListener("click", function(e) {
+                    modal.style.display = "none";
+                });
+
+<!--Modal 외의 영역 클릭시 Modal 안보이는 설정인데, 불필요해 보여서 우선 삭제하였다. -->
+<!--                modal.addEventListener("click", function(e) {-->
+<!--                    if (e.target.classList.contains("modal")) {-->
+<!--                        modal.style.display = "none";-->
+<!--                    }-->
+<!--                });-->
+
+                if (msg) {
+                    modal.style.display = "block"; // Show the modal
+                }
+            });
+        </script>
+<!--       /msg 값 확인 -->
     </th:block>
 </th:block>
