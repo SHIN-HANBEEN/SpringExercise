@@ -4,10 +4,18 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this :: content}) }">
     <th:block th:fragment="content">
 
-        <h1 class="mt-4">GuestBook List Page</h1>
+        <h1 class="mt-4">
+            GuestBook List Page
+            <span>
+                <a th:href="@{/guestbook/register}">
+                    <button type="button" class="btn btn-outline-primary">Register</button>
+                </a>
+            </span>
+        </h1>
 
         <table class="table table-striped">
             <thead>
+
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Gno</th>
@@ -17,7 +25,11 @@
             </thead>
             <tbody>
                 <tr th:each="dto: ${result.dtoList}">
-                    <th scope="row">[[${dto.gno}]]</th>
+                    <th scope="row">
+                        <a th:href="@{ /guestbook/read( gno = ${dto.gno}, page = ${result.page} ) }">
+                            [[${dto.gno}]]
+                        </a>
+                    </th>
                     <td>[[${dto.title}]]</td>
                     <td>[[${dto.writer}]]</td>
                     <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
@@ -28,18 +40,18 @@
 <!--        페이징 출력 -->
         <ul class="pagination h-100 justify-content-center align-items-center">
             <li class="page-item " th:if="${result.prev}">
-                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${result.page-10})}" tabindex="-1">Previous</a>
+                <a class="page-link" th:href="@{/guestbook/list(page=${result.page-10})}" tabindex="-1">Previous</a>
             </li>
 
             <li th:class=" 'page-item ' + ${result.page == page?'active':''} "
                 th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${page})}">
+                <a class="page-link" th:href="@{/guestbook/list(page=${page})}">
                     [[${page}]]
                 </a>
             </li>
 
             <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{http://localhost:8080/guestbook/list(page=${(10*((result.page+10)/10)) + 1})}">Next</a>
+                <a class="page-link" th:href="@{/guestbook/list(page=${(10*((result.page+10)/10)) + 1})}">Next</a>
             </li>
         </ul>
 <!--    /페이징 출력 -->
@@ -86,17 +98,10 @@
                     modal.style.display = "none";
                 });
 
-<!--Modal 외의 영역 클릭시 Modal 안보이는 설정인데, 불필요해 보여서 우선 삭제하였다. -->
-<!--                modal.addEventListener("click", function(e) {-->
-<!--                    if (e.target.classList.contains("modal")) {-->
-<!--                        modal.style.display = "none";-->
-<!--                    }-->
-<!--                });-->
-
                 if (msg) {
                     modal.style.display = "block"; // Show the modal
                 }
-            });
+            }
         </script>
 <!--       /msg 값 확인 -->
     </th:block>
