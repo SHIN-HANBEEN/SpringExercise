@@ -3,7 +3,7 @@
 
 <th:block th:replace="~{/layout/basic :: setContent(~{this :: content}) }">
     <th:block th:fragment="content">
-
+        <!-- 제목 및 등록 버튼 -->
         <h1 class="mt-4">
             GuestBook List Page
             <span>
@@ -12,7 +12,33 @@
                 </a>
             </span>
         </h1>
-
+        <!-- /제목 및 등록 버튼 -->
+        <!-- 검색 창 -->
+        <form action="/guestbook/list" method="get" id="searchForm">
+            <div class="input-group">
+                <input type="hidden" name="page" value="1" />
+                <div class="input-group-prepend">
+                    <select class="form-select" name="type">
+                        <option th:selected="${pageRequestDTO.type == null}">------</option>
+                        <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                        <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
+                        <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>
+                        <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목 + 내용</option>
+                        <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>
+                    </select>
+                </div>
+                <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}"/>
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-outline-secondary btn-search" id="btn-search" type="button">
+                        Search
+                    </button>
+                    <button class="btn btn-outline-secondary btn-clear" id="btn-clear" type="button">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- /검색 창 -->
         <table class="table table-striped">
             <thead>
 
@@ -82,26 +108,39 @@
     해단 버튼이 클릭되었을 때 display 를 none 으로 설정해둔다.
 -->
         <script th:inline="javascript">
-            var msg = [[${msg}]];
-            console.log(msg);
+           // 검색처리
+           var searchForm = $("#searchForm");
+           $(".btn-search").click( function(e) {
+               searchForm.submit();
+           } );
+           $(".btn-clear").click( function(e) {
+               searchForm.empty().submit();
+           } );
+           // \검색처리
 
-            // Wait for the DOM to be ready
-            document.addEventListener("DOMContentLoaded", function() {
-                const modal = document.querySelector(".modal");
-                const closeBtn1 = modal.querySelector(".close-area1");
-                const closeBtn2 = modal.querySelector(".close-area2");
+           // 회원 등록 완료 시 모달 창
+           var msg = [[${msg}]];
+           console.log(msg);
+           // Wait for the DOM to be ready
+           document.addEventListener("DOMContentLoaded", function() {
 
-                closeBtn1.addEventListener("click", function(e) {
-                    modal.style.display = "none";
-                });
-                closeBtn2.addEventListener("click", function(e) {
-                    modal.style.display = "none";
-                });
+               const modal = document.querySelector(".modal");
+               const closeBtn1 = modal.querySelector(".close-area1");
+               const closeBtn2 = modal.querySelector(".close-area2");
 
-                if (msg) {
-                    modal.style.display = "block"; // Show the modal
-                }
-            }
+               closeBtn1.addEventListener("click", function(e) {
+                   modal.style.display = "none";
+               });
+               closeBtn2.addEventListener("click", function(e) {
+                   modal.style.display = "none";
+               });
+
+               if (msg) {
+                   modal.style.display = "block"; // Show the modal
+               }
+           });
+           // \모달 처리
+
         </script>
 <!--       /msg 값 확인 -->
     </th:block>
