@@ -23,6 +23,12 @@ public class GuestbookRepositoryTests {
     private GuestbookRepository guestbookRepository;
 
     @Test
+    public void 단건조회() {
+        long gno = 315;
+        System.out.println(guestbookRepository.findById(gno));
+
+    }
+    @Test
     public void insertDummies() {
         IntStream.rangeClosed(1, 300).forEach(i ->
                 {
