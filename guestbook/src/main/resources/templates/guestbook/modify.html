@@ -8,6 +8,9 @@
         <form action="/guestbook/modify" method="post">
             <!-- 페이지 번호(수정이 완료된 이후에 페이지 정보를 유지시키는 역할) -->
             <input type="hidden" name="page" th:value="${requestDTO.page}" />
+            <input type="hidden" name="type" th:value="${requestDTO.type}" />
+            <input type="hidden" name="keyword" th:value="${requestDTO.keyword}" />
+            <!-- /페이지 번호(수정이 완료된 이후에 페이지 정보를 유지시키는 역할) -->
 
             <div class="form-group">
                 <label>Gno</label>
@@ -66,13 +69,19 @@
             } );
 
             $('.listBtn').click( function() {
-                var pageInfo = $( " input[ name = 'page' ] " );
+                var page = $( " input[ name = 'page' ] " );
+                var type = $( " input[ name = 'type' ] " );
+                var keyword = $( " input[ name = 'keyword' ] " );
+
                 actionForm.empty(); // form 태그의 모든 내용을 지운다.
-                actionForm.append(pageInfo); // 목록 페이지 이동에 필요한 페이지 정보를 다시 추가
+                actionForm.append(page); // 목록 페이지 이동에 필요한 페이지 정보를 다시 추가
+                actionForm.append(type); // 목록 페이지 이동에 필요한 페이지 정보를 다시 추가
+                actionForm.append(keyword); // 목록 페이지 이동에 필요한 페이지 정보를 다시 추가
+
                 actionForm
                         .attr("action", "/guestbook/list")
                         .attr("method", "get");
-                //console.log(actionForm.html()); // 원하는 정보만 잘 올라갔는지 확인, 성공하면 주석처리
+
                 actionForm.submit();
             } );
         </script>
