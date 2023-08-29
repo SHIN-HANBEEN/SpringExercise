@@ -63,10 +63,10 @@ public class GuestbookController {
         log.info("dto: " + dto);
         service.modify(dto);
 
+        redirectAttributes.addAttribute("gno", dto.getGno());
         redirectAttributes.addAttribute("page", requestDTO.getPage()); // redirect 할 때 정보를 유지시키기
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
-        redirectAttributes.addAttribute("gno", dto.getGno());
 
         return "redirect:/guestbook/read";
     }
