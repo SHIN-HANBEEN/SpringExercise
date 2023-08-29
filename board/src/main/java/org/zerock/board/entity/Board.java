@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "writer") // writer 는 외래키이므로 ToString 에서 배제해주어야 합니다.
-public class Board {
+public class Board extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
