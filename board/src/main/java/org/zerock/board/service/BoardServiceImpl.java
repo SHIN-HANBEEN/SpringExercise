@@ -36,8 +36,17 @@ public class BoardServiceImpl implements BoardService{
     public PageResultDTO<BoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO) {
         log.info(pageRequestDTO);
         Function<Object[], BoardDTO> fn = ( en -> entityToDTO( (Board)en[0], (Member) en[1], (Long) en[2] ) );
-        Page<Object[]> result = repository.getBoardWithReplyCount(
-                pageRequestDTO.getPageable( Sort.by("bno").descending() ) );
+
+//        Page<Object[]> result = repository.getBoardWithReplyCount( //기존에 사용한 페이징 처리
+//                pageRequestDTO.getPageable( Sort.by("bno").descending() ) );
+
+        /* JPQLQuery 활용 페이징 처리 */
+        Page<Object[]> result = repository.searchPage(
+                pageRequestDTO.getType(),
+                pageRequestDTO.getKeyword(),
+                pageRequestDTO.getPageable(Sort.by("bno").descending()) );
+        /* /JPQLQuery */
+
         return new PageResultDTO<>(result, fn);
     }
 
