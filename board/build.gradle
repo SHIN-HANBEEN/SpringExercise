@@ -47,10 +47,10 @@ dependencies {
 	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0' //Querydsl NoResultException 대응
 	implementation "com.querydsl:querydsl-jpa:5.0.0:jakarta"
 	annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
-	implementation "com.querydsl:querydsl-jpa"
+//	implementation "com.querydsl:querydsl-jpa"
 	implementation "com.querydsl:querydsl-core"
 	implementation "com.querydsl:querydsl-collections"
-	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
+//	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa" // querydsl JPAAnnotationProcessor 사용 지정
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api") // java.lang.NoClassDefFoundError (javax.annotation.Generated) 대응 코드
 	annotationProcessor("jakarta.persistence:jakarta.persistence-api") // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드
 	/* /querydsl settings 2 */
@@ -61,7 +61,8 @@ tasks.named('test') {
 }
 
 /* Querydsl 설정부 3 */
-def querydslDir = "$buildDir/generated/querydsl" //Repository 확장을 위한 Querydsl 설정
+
+def querydslDir = '$buildDir/generated/querydsl' //Repository 확장을 위한 Querydsl 설정
 def generated = 'src/main/generated'
 
 // querydsl QClass 파일 생성 위치를 지정
@@ -71,26 +72,26 @@ tasks.withType(JavaCompile) {
 
 querydsl {
 	jpa = true
-//	querydslSourcesDir = generated
-	querydslSourcesDir = querydslDir //Repository 확장을 위한 Querydsl 설정
+	querydslSourcesDir = generated
+//	querydslSourcesDir = querydslDir //Repository 확장을 위한 Querydsl 설정
 }
 
 // java source set 에 querydsl QClass 위치 추가
-//sourceSets {
-//	main.java.srcDirs += [ generated ]
-//}
-
 sourceSets {
-	main.java.srcDirs querydslDir //Repository 확장을 위한 Querydsl 설정
+	main.java.srcDirs += [ generated ]
 }
+
+//sourceSets {
+//	main.java.srcDirs querydslDir //Repository 확장을 위한 Querydsl 설정
+//}
 
 // complieQuerydsl Task에 clean 동작 추가
 tasks.compileQuerydsl.dependsOn(clean);
 
 configurations {
-	compileOnly { //Repository 확장 안되면 여기 확인해보자..
-		extendsFrom annotationProcessor
-	}
+//	compileOnly { //Repository 확장 안되면 여기 확인해보자..
+//		extendsFrom annotationProcessor
+//	}
 	querydsl.extendsFrom compileClasspath
 }
 
