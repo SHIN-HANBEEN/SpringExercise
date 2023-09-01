@@ -50,6 +50,99 @@
                                              ) }">
             <button type="button" class="btn btn-info">List</button>
         </a>
+        <!-- 댓글 추가, 조회, 삭제 버튼 -->
+        <div>
+            <div class="mt-4">
+                <button type="button" class="btn btn-outline-success addReply">댓글 추가</button>
+                <button type="button" class="btn btn-outline-info replyCount">댓글 조회([[${dto.replyCount}]])</button>
+            </div>
+            <div class="list-group replyList">
+
+            </div>
+        </div>
+        <!-- /댓글 추가, 조회, 삭제 버튼 -->
+        <!-- 모달창 -->
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="replyText" placeholder="Reply Text...">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="replyer" placeholder="Replyer">
+                            <input type="hidden" name="rno">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger replyRemove">Remove</button>
+                        <button type="button" class="btn btn-warning replyModify">Modify</button>
+                        <button type="button" class="btn btn-primary replySame">Save</button>
+                        <button type="button" class="btn btn-outline-secondary replyClose" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /모달창 -->
+        <script th:inline="javascript">
+            $(document).ready( function() {
+                var bno = [[${dto.bno}]];
+                var listGroup = $(".replyList"); //댓글이 추가될 영역
+                var replyOnOff = -1; //댓글 조회 onOff 컨트롤 변수
+
+                function formatTime(str) { //날짜 처리를 위한 함수
+                    var date = new Date(str);
+
+                    return date.getFullYear() + '/'
+                            + (date.getMonth() + 1) + '/'
+                            + date.getDate() + ' '
+                            + date.getHours() + '시 : '
+                            + date.getMinutes() + '분';
+                }
+
+                function loadJSONData() { //특정한 게시글의 댓글을 처리하는 함수 (JSON으로 받아온 데이터를 HTML 로 일일이 바꾸어 주는 JS 코드이다)
+                    $.getJSON( '/replies/board/'+bno, function(arr) {
+                        console.log(arr);
+                        var str = ""; //HTML 코드를 쌓아 넣을 변수
+
+<!--                        $('.replyCount').html(" Reply Count " + arr.length);-->
+
+                        $.each( arr, function(idx, reply) {
+                            console.log(reply);
+
+                            str += `<div class="card" data-rno="${reply.rno}">
+                                        <div class="card-body">
+                                            <h4 class="card-title">댓글${reply.rno}</h4>
+                                            <h6 class="card-subtitle mb-2 text-muted">${reply.replyer}</h6>
+                                            <p class="card-text">${reply.text}</p>
+                                            <p class="card-text">${formatTime(reply.regDate)}</p>
+                                        </div>
+                                    </div>`;
+                        } )
+
+                        listGroup.html(str); //댓글이 추가될 영역으로 설정한 태그에 str 에 담아놓은 html을 넣는다.
+                    } ) //end getJSON
+                } //end loadJSONData();
+
+                $(".replyCount").click( function() {
+                    loadJSONData();
+                    <!-- 댓글 조회 on and off 기능 수행 -->
+                    replyOnOff *= -1;
+                    if (replyOnOff === 1) {
+                        listGroup.css('display', 'block'); // Show the reply list
+                    } else if (replyOnOff === -1) {
+                        listGroup.css('display', 'none'); // Hide the reply list
+                    }
+                    <!-- /댓글 조회 on and off 기능 수행 -->
+                } ) //end Click
+            } );
+        </script>
 
     </th:block>
 </th:block>
