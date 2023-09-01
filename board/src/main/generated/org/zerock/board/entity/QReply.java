@@ -22,7 +22,15 @@ public class QReply extends EntityPathBase<Reply> {
 
     public static final QReply reply = new QReply("reply");
 
+    public final QBaseEntity _super = new QBaseEntity(this);
+
     public final QBoard board;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> modDate = _super.modDate;
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> regDate = _super.regDate;
 
     public final StringPath replyer = createString("replyer");
 

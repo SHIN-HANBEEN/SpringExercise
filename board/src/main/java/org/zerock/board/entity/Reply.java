@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString(exclude = "board") // ToString 에서 외래키인 board 제외
-public class Reply {
+public class Reply extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
@@ -18,6 +18,6 @@ public class Reply {
 
     private String replyer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Board board; // 연관관계 지정
 }
