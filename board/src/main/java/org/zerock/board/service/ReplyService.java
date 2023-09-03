@@ -11,7 +11,7 @@ public interface ReplyService {
     List<ReplyDTO> getList(Long bno); //특정 게시물의 댓글 목록가져오기
     void modify(ReplyDTO replyDTO); //댓글 수정
     void remove(Long rno); //댓글 삭제
-
+    int getReplyCount(Long bno); //댓글 개수 가져오기
     default Reply dtoToEntity(ReplyDTO replyDTO) { //ReplyDTO를 Reply 엔티티로 변환할 때는 연관관계에 의해 Board 객체의 처리가 함께 진행됨.
         Board board = Board.builder().bno(replyDTO.getBno()).build();
         Reply reply = Reply.builder()

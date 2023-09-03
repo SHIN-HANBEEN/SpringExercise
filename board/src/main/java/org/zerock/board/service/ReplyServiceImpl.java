@@ -38,4 +38,12 @@ public class ReplyServiceImpl implements ReplyService {
     public void remove(Long rno) {
         replyRepository.deleteById(rno);
     }
+
+    @Override
+    public int getReplyCount(Long bno) { //게시물의 댓글 수 가져오기
+        // Implement the logic to retrieve the reply count for the given bno (board/article).
+        // You can use your data access layer or repository to fetch this count.
+        int replyCount = replyRepository.getReplyCountByBno(bno); // Modify this line based on your repository method.
+        return replyCount;
+    }
 }
