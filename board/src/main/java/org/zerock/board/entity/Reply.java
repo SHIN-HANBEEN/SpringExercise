@@ -20,4 +20,8 @@ public class Reply extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board; // 연관관계 지정
+
+    public void setText(String text) { //댓글의 수정을 위해서 추가하였다.
+        this.text = text;
+    }
 }

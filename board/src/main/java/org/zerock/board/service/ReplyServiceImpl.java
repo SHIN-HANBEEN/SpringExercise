@@ -30,8 +30,14 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public void modify(ReplyDTO replyDTO) {
-        Reply reply = dtoToEntity(replyDTO);
-        replyRepository.save(reply);
+        Long rno = replyDTO.getRno(); //댓글을 수정할 때는 바로 save 를 시키면 새로운 댓글을 생성하는 문제를 발생시킨다. replydto 로부터 rno 를 받아서 rno 로 DB에서 꺼내와서 작업을 진행해야 한다.
+        Reply existingReply = replyRepository.findById(rno)
+                .orElseThrow(() -> new IllegalArgumentException("Reply with rno " + rno + " not found"));
+
+        existingReply.setText(replyDTO.getText());
+
+        // Save the updated reply to the repository.
+        replyRepository.save(existingReply);
     }
 
     @Override

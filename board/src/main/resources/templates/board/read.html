@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <input class="form-control" type="text" name="replyer" placeholder="Replyer">
-                            <input type="hidden" name="rno">
+                            <input type="hidden" name="rno"/>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -112,6 +112,7 @@
                             + date.getMinutes() + '분';
                 }
 
+                <!-- 댓글 불러오기 처리 -->
                 function loadJSONData() { //특정한 게시글의 댓글을 처리하는 함수 (JSON으로 받아온 데이터를 HTML 로 일일이 바꾸어 주는 JS 코드이다)
                     $.getJSON( '/replies/board/'+bno, function(arr) {
                         console.log(arr);
@@ -123,7 +124,7 @@
                             <!-- 실제 댓글이 출력될 때 사용하는 HTML -->
                             str += `<div class="card" >
                                         <div class="card-body" data-rno="${reply.rno}">
-                                            <h4 class="card-title">댓글${reply.rno}</h4>
+                                            <h4 class="card-title">${reply.rno}</h4>
                                             <h6 class="card-subtitle mb-2 text-muted">${reply.replyer}</h6>
                                             <p class="card-text">${reply.text}</p>
                                             <p class="card-text">${formatTime(reply.regDate)}</p>
@@ -141,8 +142,9 @@
                         listGroup.html(str); //댓글이 추가될 영역으로 설정한 태그에 str 에 담아놓은 html을 넣는다.
                     } ) //end getJSON
                 } //end loadJSONData();
+                <!-- /댓글 불러오기 처리 -->
 
-                <!-- 댓글 조회 버튼 -->
+                <!-- 댓글 조회 버튼 처리 -->
                 $(".replyCount").click( function() {
                     loadJSONData();
                     <!-- 댓글 조회 on and off 기능 수행 -->
@@ -154,7 +156,7 @@
                     }
                     <!-- /댓글 조회 on and off 기능 수행 -->
                 } ) //end Click
-                <!-- /댓글 조회 버튼 -->
+                <!-- /댓글 조회 버튼 처리 -->
 
                 <!-- 댓글 추가 버튼 처리 -->
                 $(".addReply").click( function() {
@@ -215,8 +217,8 @@
                 $('.replyList').on( "click", ".replyModifyRemove", function() { //replyList 에 있는 replyModifyRemove 버튼이 클릭되었을 때 동작
                     var rno = $(this).closest('.card-body').data("rno"); //댓글 번호 변수 대입
 
-                    $("input[ name='replyText' ]").val( "댓글 번호 : " + $(this).closest('.card-body').find('.card-title').text() ); //모달창 replyText 창에 댓글의 card-title 에 내용을 대입함
-                    $("input[ name='replyer' ]").val( "댓글 작성자 : " + $(this).closest('.card-body').find('.card-subtitle').text() ); //모달창 replyer 창에 댓글의 car-subtitle 대입
+                    $("input[ name='replyText' ]").val( $(this).closest('.card-body').find('.card-title').text() ); //모달창 replyText 창에 댓글의 card-title 에 내용을 대입함
+                    $("input[ name='replyer' ]").val( $(this).closest('.card-body').find('.card-subtitle').text() ); //모달창 replyer 창에 댓글의 car-subtitle 대입
                     $("input[ name='rno' ]").val(rno); //모달창에 hidden 처리되어 있는 rno input 에 rno 를 담아줌
 
                     $(".modal-footer .btn").hide(); //모달창 버튼들 우선 다 숨김 처리
@@ -250,6 +252,34 @@
                     } );
                 } );
                 <!-- /댓글 삭제 버튼 처리 -->
+
+                <!-- 댓글 수정 처리 -->
+                $('.replyModify').click( function() {
+                    var rno = $(this).closest('.card-body').data("rno");
+
+                    var reply = {
+                        rno: rno,
+                        bno: bno, //bno 변수를 js 위에서 설정해두었다.
+                        text: $('input[ name="replyText" ]').val(), //수정한 댓글의 내용이 input name = replyText 에 담겨있다.
+                        replyer: $('input[ name="replyer" ]').val() //수정한 댓글의 작성자가 input name = replyer 에 담겨있다.
+                    }
+                    console.log(reply);
+                    $.ajax( {
+                        url: '/replies/' + rno, //replies/rno 주소로
+                        method: 'put', //put 요청을 보낸다.
+                        data: JSON.stringify(reply), //reply 변수에 댓글 수정에 필요한 rno, bno, text, replyer 를 담아두었다. JSON.stringify() 를 활용하여 data로 담아둔다.
+                        contentType: 'application/json; charset=utf-8', //콘텐트 타입을 application/json; charset=utf-8 로 설정한다.
+                        success: function(result) { //ajax 요청이 성공하면 결과를 매개변수로 담아온 다음, 다음과 같은 동작을 실행시킨다.
+                            console.log("RESULT: " + result);
+                            if(result === 'success') {
+                                alert("댓글이 수정되었습니다.");
+                                modal.modal('hide');
+                                loadJSONData();
+                            }
+                        }
+                    } )
+                } )
+                <!-- /댓글 수정 처리 -->
 
             } );
         </script>

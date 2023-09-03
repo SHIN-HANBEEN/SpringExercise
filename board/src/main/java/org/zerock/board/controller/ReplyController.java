@@ -55,7 +55,12 @@ public class ReplyController {
     }
     /* /특정 게시물의 댓글 수 가져오기  */
 
-    /*  */
-
-    /* /  */
+    /* 댓글 수정 처리 */
+    @PutMapping("/{rno}")
+    public ResponseEntity<String> modify(@RequestBody ReplyDTO replyDTO) { //@RequestBody 는 view 단으로부터 받은 JSON 데이터를 ReplyDTO 에 맞는 형식으로 매핑시키는 역할을 수행한다. 그 결과 개발자는 JSON을 DTO로 따로 처리해줄 필요가 없고 바로 이용할 수 있게 된다.
+        log.info(replyDTO);
+        replyService.modify(replyDTO);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+    /* /댓글 수정 처리  */
 }
