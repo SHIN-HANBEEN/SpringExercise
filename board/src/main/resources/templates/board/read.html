@@ -126,7 +126,7 @@
                                         <div class="card-body" data-rno="${reply.rno}">
                                             <h4 class="card-title">${reply.rno}</h4>
                                             <h6 class="card-subtitle mb-2 text-muted">${reply.replyer}</h6>
-                                            <p class="card-text">${reply.text}</p>
+                                            <p class="card-text" id="replyText">${reply.text}</p>
                                             <p class="card-text">${formatTime(reply.regDate)}</p>
                                             <!-- 댓글 수정/삭제 버튼 -->
                                             <div class="mt-4">
@@ -217,8 +217,9 @@
                 $('.replyList').on( "click", ".replyModifyRemove", function() { //replyList 에 있는 replyModifyRemove 버튼이 클릭되었을 때 동작
                     var rno = $(this).closest('.card-body').data("rno"); //댓글 번호 변수 대입
 
-                    $("input[ name='replyText' ]").val( $(this).closest('.card-body').find('.card-title').text() ); //모달창 replyText 창에 댓글의 card-title 에 내용을 대입함
                     $("input[ name='replyer' ]").val( $(this).closest('.card-body').find('.card-subtitle').text() ); //모달창 replyer 창에 댓글의 car-subtitle 대입
+                    $("input[ name='replyText' ]").val( $(this).closest('.card-body').find('#replyText').text() ); //모달창 replyText 창에 댓글의 card-title 에 내용을 대입함
+                    $("input[name='replyer']").prop('readonly', true); //replyer 는 수정 불가능하게 처리
                     $("input[ name='rno' ]").val(rno); //모달창에 hidden 처리되어 있는 rno input 에 rno 를 담아줌
 
                     $(".modal-footer .btn").hide(); //모달창 버튼들 우선 다 숨김 처리
@@ -255,7 +256,7 @@
 
                 <!-- 댓글 수정 처리 -->
                 $('.replyModify').click( function() {
-                    var rno = $(this).closest('.card-body').data("rno");
+                    var rno = $("input[ name='rno' ]").val();;
 
                     var reply = {
                         rno: rno,
