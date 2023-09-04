@@ -25,19 +25,19 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //
+	implementation 'org.springframework.boot:spring-boot-starter-web' //
 
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly 'org.projectlombok:lombok' //
+	developmentOnly 'org.springframework.boot:spring-boot-devtools' //
+	annotationProcessor 'org.projectlombok:lombok' //
 
 //	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 //	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 //	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test' //
 
 	// JDBC 는 maven 에서 검색해서 찾아온다.
 	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
@@ -60,7 +60,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-/* Querydsl 설정부 3 */
+/* querydsl settings 3 */
 
 def querydslDir = '$buildDir/generated/querydsl' //Repository 확장을 위한 Querydsl 설정
 def generated = 'src/main/generated'
@@ -104,4 +104,4 @@ clean {
 	delete file(generated)
 }
 
-/* /Querydsl 설정부 */
+/* /querydsl settings 3 */
