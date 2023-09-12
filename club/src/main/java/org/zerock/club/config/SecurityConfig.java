@@ -1,5 +1,6 @@
 package org.zerock.club.config;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @Log4j2
 public class SecurityConfig {
     @Bean
@@ -36,16 +38,40 @@ public class SecurityConfig {
 //        return new InMemoryUserDetailsManager(user); //생성한 임의의 유저를 InMemoryUserDetailsManager( ) 를 활용해서 메모리 상에 있는 데이터를 이용하는 인증 매니저(AuthenticationManager)를 생성합니다.
 //    }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //url 주소마다 접근 설정 처리. SecurityFilterChain 을 반환하는 코드입니다.
-        log.info("----------filterchain--------------");
+    //deprecated 된 코드는 주석처리하였다.
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception { //url 주소마다 접근 설정 처리. SecurityFilterChain 을 반환하는 코드입니다.
+//        log.info("----------filterchain--------------");
+//
+//        http.authorizeHttpRequests()
+//                        .requestMatchers("/sample/all").permitAll()
+//                        .requestMatchers("/sample/member").hasRole("USER");
+//
+//        http.formLogin(); //인가/인증 필요할 때 로그인 화면을 띄워준다.
+//        http.csrf().disable(); //CSRF 토큰 발행을 중단시킨다. 보안상 이슈가 있어서 그렇다.
+//        http.logout();
+//        http.oauth2Login(); //google 로그인 처럼 OAuth 로그인을 위한 설정
+//
+//        return http.build();
+//    }
 
-        http.authorizeHttpRequests()
-                        .requestMatchers("/sample/all").permitAll()
-                        .requestMatchers("/sample/member").hasRole("USER");
-        http.formLogin(); //인가/인증 필요할 때 로그인 화면을 띄워준다.
-        http.csrf().disable(); //CSRF 토큰 발행을 중단시킨다. 보안상 이슈가 있어서 그렇다.
-        http.logout();
+    @Bean
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests
+                                .requestMatchers("/sample/all").permitAll()
+                                .requestMatchers("/sample/member").hasRole("USER")
+                )
+                .formLogin();
+        http
+                .csrf().disable()
+                .logout()
+                .and()
+                .oauth2Login();
+
         return http.build();
     }
 }
+
+
