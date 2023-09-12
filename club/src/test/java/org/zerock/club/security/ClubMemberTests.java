@@ -21,8 +21,8 @@ public class ClubMemberTests {
 
     @Test
     public void insertDummies() {
-        //1 - 80까지는 USER만 지정
-        //81 - 90까지는 USER, MANAGER 지정
+        //1 - 100까지는 USER만 지정
+        //81 - 100까지는 USER, MANAGER 지정
         //91 - 100까지는 USER, MANAGER, ADMIN 지정
 
         IntStream.rangeClosed(1, 100).forEach(i -> {
