@@ -23,7 +23,7 @@ public class ClubUserDetailsService implements UserDetailsService { //ClubMember
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("ClubUserDetailsService loadUserByUsername " + username);
 
-        Optional<ClubMember> result = clubMemberRepository.findByEmail(username, false); //username 이 실제로는 ClubMember 의 email 을 의미하므로 이를 사용해서 ClubMemberRepository 의 findByEmail( )을 호출한다. 소셜여부는 false 로 일단 진행했다.
+        Optional<ClubMember> result = clubMemberRepository.findByEmail(username, true); //username 이 실제로는 ClubMember 의 email 을 의미하므로 이를 사용해서 ClubMemberRepository 의 findByEmail( )을 호출한다. 소셜여부는 false 로 일단 진행했다.
         if (result.isEmpty()) {
             throw new UsernameNotFoundException("Check Email or Social "); //사용자가 존재하지 않으면 UsernameNotFoundException 으로 처리
         }

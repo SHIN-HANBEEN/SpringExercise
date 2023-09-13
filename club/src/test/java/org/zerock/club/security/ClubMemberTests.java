@@ -43,6 +43,18 @@ public class ClubMemberTests {
         });
     }
 
+//    @Test
+//    public void insertSocial() {
+//        ClubMember clubMember = ClubMember.builder()
+//                .email("shb080101@gmail.com")
+//                .password(passwordEncoder.encode("skaehddn12!@"))
+//                .name("Social 사용자")
+//                .fromSocial(true)
+//                .build();
+//        clubMember.addMemberRole(ClubMemberRole.); //social 인증 객체를 이용할 수 없어서 OAUTH2_USER 로 강제로 처리했다.
+//        repository.save(clubMember);
+//    }
+
     @Test
     public void testRead() {
         Optional<ClubMember> result = repository.findByEmail("user95@zerock.org", false);
