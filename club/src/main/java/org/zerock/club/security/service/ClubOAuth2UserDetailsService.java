@@ -29,7 +29,7 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService { //�
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException { //ClubOAuth2UserDetailsService 동작여부 확인하는 코드
         log.info("--------------------");
-        log.info("userRequest:" + userRequest); //org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest 객체
+        log.info("userRequest: " + userRequest); //org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest 객체
 
         String clientName = userRequest.getClientRegistration().getClientName();
 
@@ -46,7 +46,7 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService { //�
         String email = null;
 
         if(clientName.equals("Google")) { //구글을 이용하는 경우
-            email = oAuth2User.getAttribute("email");
+            email = oAuth2User.getAttribute("email"); //OAuth2User 의 getAttribute( )를 이용해서 이메일 정보를 추출하고 있다.
         }
 
         log.info("EMAIL: " + email);
@@ -55,7 +55,7 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService { //�
 //
 //        return oAuth2User;
 
-        ClubMember member = saveSocilMember(email);
+        ClubMember member = saveSocialMember(email);
 
         ClubAuthMemberDTO clubAuthMember = new ClubAuthMemberDTO(
                                     member.getEmail(),
@@ -72,7 +72,7 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService { //�
         return clubAuthMember;
     }
 
-    private ClubMember saveSocilMember(String email) {
+    private ClubMember saveSocialMember(String email) {
         Optional<ClubMember> result = repository.findByEmail(email, true); //소셜 로그인한 사람의 이메일이 기존에 이미 가입되어 있있는지 여부 확인
 
         if (result.isPresent()) {
