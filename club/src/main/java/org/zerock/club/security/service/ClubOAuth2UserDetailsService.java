@@ -18,6 +18,7 @@ import org.zerock.club.security.dto.ClubAuthMemberDTO;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -61,10 +62,10 @@ public class ClubOAuth2UserDetailsService extends DefaultOAuth2UserService { //�
                                     member.getEmail(),
                                     member.getPassword(),
                                     true, //fromSocial
-                                    (Collection<? extends GrantedAuthority>) member.getRoleSet().stream().map(
+                                    member.getRoleSet().stream().map(
                                             role -> new SimpleGrantedAuthority("ROLE_" + role.name())
-                                    ),
-                                    oAuth2User.getAttributes()
+                                    ).collect(Collectors.toList()),
+                                    oAuth2User.getAttributes() //OAuth2User 의 모든 데이터는 ClubAuthMemberDTO의 내부로 전달해서 필요한 순간에 사용할 수 있도록 합니다.
         );
 
         clubAuthMember.setName(member.getName());
